@@ -1,5 +1,5 @@
 name: Build and Publish image to docker hub
-on:
+on: 
   push
 
 jobs:
@@ -8,16 +8,5 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
-      
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          
-      - name: Build and push image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/koili-scripts:latest
+      - name: build image
+        run: docker build -t . koili-scripts:latest
